@@ -1,4 +1,5 @@
 import { createUser } from '../../entities/user'
+import { formatHttpResponse } from '../_utils'
 
 type createUserService = ({
     email
@@ -25,12 +26,6 @@ export const userUseCases = {
 
         const { email, _id } = await createUserService(userData)
 
-        return {
-            status: 201,
-            data: {
-                _id: _id || DEFAULT_ID,
-                email: email
-            }
-        }
+        return formatHttpResponse(201, { email, _id: _id || DEFAULT_ID })
     }
 }
